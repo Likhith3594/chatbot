@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PharmaBot</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #eef6f9;
+        }
+
+        .chat-container {
+            width: 350px;
+            margin: 50px auto;
+            border-radius: 10px;
+            background: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .chat-header {
+            background: #2e8b57;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .chat-box {
+            height: 300px;
+            padding: 10px;
+            overflow-y: auto;
+            font-size: 14px;
+        }
+
+        .user {
+            text-align: right;
+            margin: 8px;
+            color: blue;
+        }
+
+        .bot {
+            text-align: left;
+            margin: 8px;
+            color: green;
+        }
+
+        .chat-input {
+            display: flex;
+            border-top: 1px solid #ccc;
+        }
+
+        .chat-input input {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            outline: none;
+        }
+
+        .chat-input button {
+            width: 20%;
+            border: none;
+            background: #2e8b57;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="chat-container">
+    <div class="chat-header">💊 PharmaBot</div>
+
+    <div class="chat-box" id="chatBox">
+        <div class="bot">
+            Hello 👋 I am PharmaBot.<br>
+            Ask me about medicines, dosage, price, side effects, or timings.
+        </div>
+    </div>
+
+    <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Type your question..." />
+        <button onclick="sendMessage()">Send</button>
+    </div>
+</div>
+
+<script>
+function sendMessage() {
+    let input = document.getElementById("userInput");
+    let message = input.value.trim().toLowerCase();
+    let chatBox = document.getElementById("chatBox");
+
+    if (message === "") return;
+
+    chatBox.innerHTML += `<div class="user">${input.value}</div>`;
+
+    let reply = "";
+
+    if (message === "hi" || message === "hello" || message === "hey") {
+        reply = "Hello 👋 How can I help you today?";
+    }
+    else if (message.includes("dolo")) {
+        reply = "Dolo 650 is available. Price is around ₹30 per strip.";
+    }
+    else if (message.includes("medicine") || message.includes("available")) {
+        reply = "Please tell the medicine name to check availability.";
+    }
+    else if (message.includes("dosage") || message.includes("how to take")) {
+        reply = "Dosage depends on age and condition. Please consult a doctor.";
+    }
+    else if (message.includes("side effect")) {
+        reply = "Common side effects include headache, nausea, or dizziness.";
+    }
+    else if (message.includes("price") || message.includes("cost")) {
+        reply = "Please mention the medicine name to know the price.";
+    }
+    else if (message.includes("time") || message.includes("open")) {
+        reply = "Pharmacy timings are 9 AM to 9 PM, Monday to Saturday.";
+    }
+    else {
+        reply = "Sorry, I didn't understand. Please ask about medicines, dosage, price, side effects, or timings.";
+    }
+
+    chatBox.innerHTML += `<div class="bot">${reply}</div>`;
+    chatBox.scrollTop = chatBox.scrollHeight;
+    input.value = "";
+}
+</script>
+
+</body>
+</html>
